@@ -1,0 +1,76 @@
+  <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Recommendation System</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+
+    <h1> AA Recommendation System </h1>
+    <p> Hi there, I can see that you are a new user! </p>
+    <p> Please help me to know your prefence better by ranking the generated titles below:</p>
+
+    <div>
+      <!-- Create a form section to generate a POST to retrive titles selecitons-->
+      <form action="/testing" method="POST">
+        <button type="submit" name='gen_title', value='title_gened'>Generate Title to rank</button>
+      </form>
+    </div>
+    <br>
+    <div>
+      {% if output22 %}
+      <b>Sample Choices:</b> {{ output22 | safe }}
+      {% endif %} 
+    </div>
+    <br>
+    <br>
+    <div>
+      <form action="/testing" method="POST">
+        <label>Input your ranking as a string eg. 5,4,3,2,1</label>
+        <br>
+        <br>
+        <input type = 'text' id='ranking' name='ranked_result', value>
+        <br>
+        <br>
+        <button type="submit", name='rank_title', value='title_ranked'>Submit Ranking</button>
+      </form>      
+    </div>
+    <br>    
+    <br>
+    <div>
+      {% if rError %}
+      {{ rError }}
+      {% endif %} 
+    </div>
+    <div>
+      {% if en_rec %}
+      <b>Featured Selection based on your preference: </b> 
+      {{ en_rec | safe }}
+      {% endif %} 
+    </div>
+    <br>
+    <div>
+      {% if co_rec %}
+      <b>Selection by users similiar to you:</b> 
+      {{ co_rec | safe }}
+      {% endif %} 
+    </div>
+    <br>
+    <div>
+      {% if co_rec %}
+      <b>Titles simiilar to your ratings: </b> 
+      {{ tb_rec | safe }}
+      {% endif %} 
+    </div>
+    <br>
+    <div>
+      {% if kbf_rec %}
+      <b>Titles with similar keywords as your ratings:</b> 
+      {{ kbf_rec | safe }}
+      {% endif %} 
+    </div>
+    {% endblock %}
+  </body>
+</html>
