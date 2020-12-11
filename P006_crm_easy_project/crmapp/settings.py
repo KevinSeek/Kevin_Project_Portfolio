@@ -56,12 +56,10 @@ if ENV_ROLE == 'development':
     CRMEASY_DB_PASS = get_env_variable('CRMEASY_DB_PASS')
 
 
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     
     # User defined apps
@@ -165,3 +163,8 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# Additional Settings
+if ENV_ROLE == 'production':
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
